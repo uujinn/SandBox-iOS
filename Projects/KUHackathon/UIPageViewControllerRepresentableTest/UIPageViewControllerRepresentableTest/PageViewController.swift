@@ -6,59 +6,58 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
-struct PageViewController: UIViewControllerRepresentable{
-  var controllers: [UIViewController]
-
+// Page instances 저장
+struct PageViewController<Page: View>: UIViewControllerRepresentable{
+  var pages: [Page]
+  
+  // SwiftUI calls this method a single time when it’s ready to display the view, and then manages the view controller’s life cycle.
   func makeUIViewController(context: Context) -> UIPageViewController {
     let pageViewController = UIPageViewController(
       transitionStyle: .scroll,
       navigationOrientation: .horizontal)
-    
-    
+    pageViewController.dataSource = context.coordinator
     return pageViewController
   }
   
   func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
-    pageViewController.setViewControllers([controllers[0]], direction: .forward, animated: true)
+    pageViewController.setViewControllers(
+      [UIHostingController(rootView: pages[0])], direction: .forward, animated: true)
   }
   
   func makeCoordinator() -> Coordinator {
-    return Coordinator(self)
+    Coordinator(self)
   }
   
-  class Coordinator: NSObject, UIPageViewControllerDataSource{
-    
+  class Coordinator: NSObject, UIPageViewControllerDataSource {
     var parent: PageViewController
+    var controllers = [UIViewController]()
     
     init(_ pageViewController: PageViewController) {
-      self.parent = pageViewController
+      parent = pageViewController
+      controllers = parent.pages.map { UIHostingController(rootView: $0) }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-      guard let index = parent.controllers.firstIndex(of: viewController) else {
+      guard let index = controllers.firstIndex(of: viewController) else {
         return nil
       }
-      
-      if index == 0{
-        return parent.controllers.last
+      if index == 0 {
+        return controllers.last
       }
-      return parent.controllers[index - 1]
+      return controllers[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-      guard let index = parent.controllers.firstIndex(of: viewController) else {
+      guard let index = controllers.firstIndex(of: viewController) else {
         return nil
       }
-      if index + 1 == parent.controllers.count{
-        return parent.controllers.first
+      if index + 1 == controllers.count {
+        return controllers.first
       }
-      
-      return parent.controllers[index + 1]
+      return controllers[index + 1]
     }
   }
 }
-
-
