@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
   var body: some View {
-    ScrollView {
-      PullToRefresh(coordinateSpaceName: "pullToRefresh") {
-        // do your stuff when pulled
+    ScrollView{
+      VStack{
+        Text("hi")
+        Text("hello")
       }
-      
-      Text("Some view...")
-    }.coordinateSpace(name: "pullToRefresh")
+      .frame(width: 300)
+    }
+    .background(Color.yellow)
   }
 }
 
