@@ -1,0 +1,58 @@
+import SwiftUI
+import SwiftUIPager
+
+struct BizarreExampleView: View {
+    @StateObject var page1: Page = .first()
+    @StateObject var page2: Page = .first()
+    var data = Array(0..<10)
+
+    var body: some View {
+        GeometryReader { proxy in
+            VStack(spacing: 10) {
+                Text("Vertical, alignment start").bold()
+                Pager(page: self.page1,
+                      data: self.data,
+                      id: \.self) {
+                        self.pageView($0)
+                }
+                .vertical()
+                .alignment(.start)
+                .itemSpacing(10)
+                .itemAspectRatio(1.3)
+                .background(Color.gray.opacity(0.2))
+
+                Spacer()
+
+                Text("Start to End, interactive").bold()
+                Pager(page: self.page2,
+                      data: self.data,
+                      id: \.self) {
+                        self.pageView($0)
+                }
+                .itemSpacing(10)
+                .horizontal(.rightToLeft)
+//                .horizontal(.endToStart)
+                .interactive(scale: 0.8)
+                .itemAspectRatio(0.7)
+                .background(Color.gray.opacity(0.5))
+            }
+        }
+    }
+
+    func pageView(_ page: Int) -> some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.yellow)
+            Text("Page: \(page)")
+                .bold()
+        }
+        .cornerRadius(5)
+        .shadow(radius: 5)
+    }
+}
+
+struct BizarreExampleView_Previews: PreviewProvider {
+  static var previews: some View {
+    BizarreExampleView()
+  }
+}
