@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Refresher
 
 struct MainView: View {
   @State private var searchText = ""
+  @State var refreshed = 0
   
   let columns = [
     //추가 하면 할수록 화면에 보여지는 개수가 변함
@@ -113,10 +115,10 @@ struct MainView: View {
                 LazyVGrid(columns: columns2, spacing: 20){
                   VStack{
                     Capsule()
-                        .fill(Color.yellow)
-                        .frame(height: 50)
+                      .fill(Color.yellow)
+                      .frame(height: 50)
                     Text("포장")
-                        .foregroundColor(.black)
+                      .foregroundColor(.black)
                   }
                   .background(.white)
                 }
@@ -149,10 +151,10 @@ struct MainView: View {
                 LazyVGrid(columns: columns2, spacing: 20){
                   VStack{
                     Capsule()
-                        .fill(Color.yellow)
-                        .frame(height: 50)
+                      .fill(Color.yellow)
+                      .frame(height: 50)
                     Text("배민스토어")
-                        .foregroundColor(.black)
+                      .foregroundColor(.black)
                   }
                   .background(.white)
                 }
@@ -188,6 +190,12 @@ struct MainView: View {
               }.padding(.horizontal, 20)
             }// SearchBar
           }//ScrollView
+          .refresher(refreshView: EmojiRefreshView.init) { done in // Called when pulled to refresh
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+              refreshed += 1
+              done() // Stops the refresh view (can be called on a background thread)
+            }
+          }
           .background(Color.gray.opacity(0.15))
         }//VStack
         .navigationBarHidden(true)
@@ -200,5 +208,53 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
   static var previews: some View {
     MainView()
+  }
+}
+
+public struct EmojiRefreshView: View {
+  @Binding var state: RefresherState
+  @State private var angle: Double = 0.0
+  @State private var isAnimating = false
+  
+  var foreverAnimation: Animation {
+    Animation.linear(duration: 1.0)
+      .repeatForever(autoreverses: false)
+  }
+  
+  public var body: some View {
+    VStack {
+      switch state.mode {
+      case .notRefreshing:
+        VStack{
+          Text("🤪")
+            .onAppear {
+              isAnimating = false
+            }
+        }
+        .frame(width: Screen.maxWidth, height: 50)
+        .background(Color(hex: "2EBFBC"))
+        
+      case .pulling:
+        VStack{
+          Text("😯")
+            .rotationEffect(.degrees(360 * state.dragPosition))
+        }
+        .frame(width: Screen.maxWidth, height: 50)
+        .background(Color(hex: "2EBFBC"))
+      case .refreshing:
+        VStack{
+          Text("😂")
+            .rotationEffect(.degrees(self.isAnimating ? 360.0 : 0.0))
+            .onAppear {
+              withAnimation(foreverAnimation) {
+                isAnimating = true
+              }
+            }
+        }
+        .frame(width: Screen.maxWidth, height: 50)
+        .background(Color(hex: "2EBFBC"))
+      }
+    }
+    .scaleEffect(2)
   }
 }
