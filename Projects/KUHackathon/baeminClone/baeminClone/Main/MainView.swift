@@ -11,6 +11,7 @@ import Refresher
 struct MainView: View {
   @State private var searchText = ""
   @State var refreshed = 0
+  @State var active = false
   
   let columns = [
     //추가 하면 할수록 화면에 보여지는 개수가 변함
@@ -97,6 +98,9 @@ struct MainView: View {
                         .frame(height: 50)
                       Text("배민1")
                         .foregroundColor(.black)
+                    }
+                    .onTapGesture {
+                      self.active = true
                     }
                     .frame(height: (Screen.maxWidth - 50)/2)
                     .background(.white)
@@ -218,12 +222,17 @@ struct MainView: View {
               }
             }
             .background(Color(hex: "2EBFBC"))
+
           }//ZStack
-          
-          
+          NavigationLink(isActive: $active) {
+            oneView()
+          } label: {
+            Text("")
+          }
         }//VStack
         .navigationBarHidden(true)
         .ignoresSafeArea()
+        .navigationViewStyle(StackNavigationViewStyle())
       }//NavigationView
     }//ZStack
   }
