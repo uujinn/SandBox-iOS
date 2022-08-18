@@ -32,13 +32,9 @@ struct ContentView: View {
       ZStack{
         switch selection {
         case .one:
-          VStack{
-            Text("one")
-          }
+          oneView()
         case .two:
-          VStack{
-            Text("two")
-          }
+          TwoView()
         case .three:
           VStack{
             Text("three")
