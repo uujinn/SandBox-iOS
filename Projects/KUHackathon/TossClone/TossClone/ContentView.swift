@@ -28,6 +28,7 @@ struct ContentView: View {
   
   var body: some View {
     VStack(spacing: 0){
+      Spacer()
       ZStack{
         switch selection {
         case .one:
