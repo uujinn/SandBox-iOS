@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A340D3328B1AEC400247441 /* makefullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A340D3228B1AEC400247441 /* makefullScreen.swift */; };
+		0A340D3528B1AF6D00247441 /* Stackoverflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A340D3428B1AF6D00247441 /* Stackoverflow.swift */; };
+		0A340D5C28B1C1B300247441 /* re.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A340D5B28B1C1B300247441 /* re.swift */; };
 		0A55737C28A8F60F007B578C /* gestureTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A55737B28A8F60F007B578C /* gestureTestApp.swift */; };
 		0A55737E28A8F60F007B578C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A55737D28A8F60F007B578C /* ContentView.swift */; };
 		0A55738028A8F610007B578C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A55737F28A8F610007B578C /* Assets.xcassets */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A340D3228B1AEC400247441 /* makefullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makefullScreen.swift; sourceTree = "<group>"; };
+		0A340D3428B1AF6D00247441 /* Stackoverflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stackoverflow.swift; sourceTree = "<group>"; };
+		0A340D5B28B1C1B300247441 /* re.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = re.swift; sourceTree = "<group>"; };
 		0A55737828A8F60F007B578C /* gestureTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gestureTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A55737B28A8F60F007B578C /* gestureTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gestureTestApp.swift; sourceTree = "<group>"; };
 		0A55737D28A8F60F007B578C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +59,9 @@
 			children = (
 				0A55737B28A8F60F007B578C /* gestureTestApp.swift */,
 				0A55737D28A8F60F007B578C /* ContentView.swift */,
+				0A340D3228B1AEC400247441 /* makefullScreen.swift */,
+				0A340D3428B1AF6D00247441 /* Stackoverflow.swift */,
+				0A340D5B28B1C1B300247441 /* re.swift */,
 				0A55737F28A8F610007B578C /* Assets.xcassets */,
 				0A55738128A8F610007B578C /* Preview Content */,
 			);
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A340D3528B1AF6D00247441 /* Stackoverflow.swift in Sources */,
 				0A55737E28A8F60F007B578C /* ContentView.swift in Sources */,
+				0A340D5C28B1C1B300247441 /* re.swift in Sources */,
 				0A55737C28A8F60F007B578C /* gestureTestApp.swift in Sources */,
+				0A340D3328B1AEC400247441 /* makefullScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,7 +37,7 @@ struct TwoView: View {
     Image(systemName: "star.circle.fill")
       .font(.system(size: 100))
       .opacity(dragState.isPressing ? 0.5 : 1.0)
-      .offset(x: position.width + dragState.translation.width, y: position.height + dragState.translation.height)
+      .offset(x: position.width + dragState.translation.width, y: position.height)
       .animation(.easeInOut, value: dragState.translation)
       .foregroundColor(.green)
       .gesture(
@@ -61,7 +61,7 @@ struct TwoView: View {
               return
             }
             
-            self.position.height += drag.translation.height
+//            self.position.height += drag.translation.height
             self.position.width += drag.translation.width
           })
       )
